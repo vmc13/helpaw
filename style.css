@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;1,600&display=swap');
+
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+/*NAVBAR*/
+.navbar{
+    background-color: #f9e2f9;
+}
+
+.img_logo{
+    padding-left: 30px;
+    width: 100px;
+}
+
+.navbar-brand{
+    font-weight: 600;
+    padding-left: 10px;
+    font-size: 30px;
+}
+
+.nav-item{
+    margin-right: 15px;
+    font-weight: 300;
+    padding: 8px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+.nav-item:hover{
+    color: purple;
+}
+
+.btn{
+    background-color: purple;
+    color: #ffff;
+    border-radius: 20px;
+    padding: 8px 25px 8px 25px;
+}
+
+/*MAIN*/
+.principal{
+    display: flex;
+    height: 100vh;
+}
+/*CONTAINER ESQUERDO*/
+.container-left{
+    width: 100vw;
+    text-align: center;
+    padding-left: 50px;
+}
+
+h1{
+    font-size: 50px;
+}
+
+.presentation{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left_text{
+    padding: 20px 70px 20px 70px;
+    font-size: 1.1rem;
+}
+
+.options{
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/*.btn_left{
+    margin-top: 20px;
+    background-color: purple;
+    color: #ffff;
+    border-radius: 20px;
+    padding: 10px 25px 10px 25px;
+    border: none;
+    font-size: 1.2rem;
+}
+*/
+
+.img_options{
+    width: 80px;
+}
+
+.sr_label{
+    text-decoration: none;
+    color: rgb(67, 0, 67);
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 15px;
+}
+
+.a_sr{
+    background-color: #e1bfe1;
+    border-radius: 100px 20px 110px 80px;
+    padding: 18px;
+}
+
+/*CONTAINER DIREITO*/
+.container-right{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_main{
+    width: 500px;
+    background-color: #f9e2f9;
+    border-radius: 120px 20px 160px 80px;
+}
