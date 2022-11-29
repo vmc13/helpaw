@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'cadastro.dart';
+import 'home/feed.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -136,7 +137,12 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                       ],
                     ),
-                    onPressed: () => {},
+                    onPressed: () => {
+                      Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:(context)=> Feed()),)
+                    },
                   ),
                 ),
               ),
