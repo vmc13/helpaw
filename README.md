@@ -36,5 +36,5 @@ Código aqui
 ```
 </br>
 <h4 align="center">
-   Feito com 💜 by  <a href="https://www.linkedin.com/in/mateusaraujobarros/" target="_blank"> Mateus Araújo </a>
+   Feito com ❤️ por Victória Mendes.
 </h4>
