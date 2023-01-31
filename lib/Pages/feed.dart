@@ -233,6 +233,17 @@ class _FeedState extends State<Feed> {
                                     ),
                                   ],
                                 ),
+                                SizedBox(height: 20.0),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: (){}, 
+                                      icon: Icon(Icons.share),
+                                      iconSize: 30,
+                                      color: Colors.purple[800],
+                                    ),
+                                  ],
+                                ),
                               ],),
                               IconButton(
                                 onPressed: (){}, 

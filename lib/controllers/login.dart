@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:helpaw_mobile/controllers/maps.dart';
 import 'cadastro.dart';
-import '../Pages/feed.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -141,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:(context)=> Feed()),)
+                      builder:(context)=> Maps()),)
                     },
                   ),
                 ),

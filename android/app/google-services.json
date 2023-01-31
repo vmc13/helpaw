@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "709223229137",
+    "project_id": "helpaw",
+    "storage_bucket": "helpaw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:709223229137:android:bbe1dd4afbea53980847f0",
+        "android_client_info": {
+          "package_name": "com.example.helpaw_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "709223229137-lta8hluctemmf9ku50uq7s2f26ciknh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYKuyLWlUvGG1DX9SVeJiR4Qfk4nlvl8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "709223229137-lta8hluctemmf9ku50uq7s2f26ciknh4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
