@@ -14,9 +14,12 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
-  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
 
   late GoogleMapController controller;
+
+  BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+
+  Uint8List? markerImage;
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
 
@@ -35,6 +38,7 @@ class _MapsState extends State<Maps> {
   }
 
   getMarkerdata() async {
+    final Uint8List markerIcon = await getBytesFromAssets('images/logo_paw.png', 100);
     FirebaseFirestore.instance.collection('maps').get().then((docData) {
       if (docData.docs.isNotEmpty) {
         for (int i = 0; i < docData.docs.length; ++i) {
@@ -45,6 +49,25 @@ class _MapsState extends State<Maps> {
   }
 
   // sTYLE MARKER
+  Future<Uint8List> getBytesFromAssets(String path, int width) async{
+    ByteData data = await  rootBundle.load(path);
+    ui.Codec codec = await
+    ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth:
+    width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+  }
+
+  void addCustomIcon() {
+    BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(), "images/logo_paw.png").then(
+        (icon) {
+          setState(() {
+            markerIcon = icon;
+          });
+        }
+      );
+  }
 
   void initState() {
     getMarkerdata();
@@ -52,17 +75,6 @@ class _MapsState extends State<Maps> {
     super.initState();
   }
 
-  void addCustomIcon() {
-    BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), "images/logo_paw.png")
-        .then(
-      (icon) {
-        setState(() {
-          markerIcon = icon;
-        });
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
