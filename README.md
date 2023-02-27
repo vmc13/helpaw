@@ -19,10 +19,9 @@
 
 # 🖼 Screenshot das telas do projeto
 <div>
-  <h4>Respectivamente telas de login, cadastro e feed.</h4>
+  <h4>Respectivamente telas de login, cadastro</h4>
   <img height="400" src="/images/github_images/login_page.jpeg"/>
   <img height="400" src="/images/github_images/register_page.jpeg"/>
-  <img height="400" src="/images/github_images/feed_page.jpeg/">
 </div>
 
 # 🛠️ Funcionalidades
