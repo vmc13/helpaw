@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:helpaw_mobile/controllers/maps.dart';
+import 'package:helpaw_mobile/controllers/maps_lost.dart';
+import '../Pages/home.dart';
 import 'cadastro.dart';
 
 class LoginPage extends StatefulWidget {
@@ -11,7 +13,23 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
+  final _emailController = TextEditingController();
+  final _psController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
+
   bool _showPassword = false;
+
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user)
+    {
+      if (user==null) {
+        print('Você não tem um usuário logado!');
+      } else {
+        print('Você tem um usuário logado');
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 25),
               TextField(
+                controller: _emailController,
                 autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -60,7 +79,9 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 15),
 
               TextField(
-                obscureText: _showPassword == false ? true : false,
+                controller: _psController,
+                obscureText: _showPassword == false ? true :
+                false,
                 autofocus: false,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
@@ -91,7 +112,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     "Recuperar Senha",
                   ),
-                  onPressed: (){}
+                  onPressed: (){
+
+                  }
                 ),
               ),
 
@@ -137,10 +160,12 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     onPressed: () => {
+                      login()
+                      /*
                       Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder:(context)=> Maps()),)
+                      builder:(context)=> Maps()),)*/
                     },
                   ),
                 ),
@@ -209,5 +234,36 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+
+  login() async {
+    try{
+      UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+        email: _emailController.text, 
+        password: _psController.text);
+        if(userCredential != null){
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Home(),
+              ) 
+            );
+        }
+    } on FirebaseAuthException catch(e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Usuário não encontrado"),
+          backgroundColor: Colors.redAccent,
+        ),);
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Sua senha incorreta"),
+          backgroundColor: Colors.redAccent,
+        ),
+        );
+      }
+    }
   }
 }

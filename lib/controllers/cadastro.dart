@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../Pages/home.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -10,6 +13,11 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+
+  final _nomeController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _psController = TextEditingController();
+  final _firebaseAuth = FirebaseAuth.instance;
 
   bool _showPassword = false;
 
@@ -47,6 +55,7 @@ class _SignUpState extends State<SignUp> {
 
               SizedBox(height: 25),
               TextField(
+                controller: _nomeController,
                 autofocus: false,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
@@ -86,6 +95,7 @@ class _SignUpState extends State<SignUp> {
 
               SizedBox(height: 10),
               TextField(
+                controller: _emailController,
                 autofocus: false,
                 keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
@@ -99,6 +109,7 @@ class _SignUpState extends State<SignUp> {
 
               SizedBox(height: 10),
               TextField(
+                controller: _psController,
                 obscureText: _showPassword == false ? true : false,
                 autofocus: false,
                 keyboardType: TextInputType.text,
@@ -162,7 +173,9 @@ class _SignUpState extends State<SignUp> {
                           ),
                       ],
                     ),
-                    onPressed: () => {},
+                    onPressed: () => {
+                      cadastrar()
+                    },
                   ),
                 ),
               ),
@@ -172,4 +185,37 @@ class _SignUpState extends State<SignUp> {
       ),
     );
   }
+
+  
+  cadastrar() async {
+    try {
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+              email: _emailController.text, password: _psController.text);
+      if (userCredential != null) {
+        userCredential.user?.updateDisplayName(_nomeController.text);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => Home()),
+            (route) => false);
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Crie uma senha mas forte'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      } else if (e.code == 'email-already-in-use') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('este e-mail ja foi cadastrado, tente outro e-mail'),
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      }
+    }
+  }
 }
+

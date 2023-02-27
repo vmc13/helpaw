@@ -6,14 +6,14 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:ui' as ui;
 import 'dart:typed_data';
 
-class Maps extends StatefulWidget {
-  const Maps({super.key});
+class MapsLost extends StatefulWidget {
+  const MapsLost({super.key});
 
   @override
-  State<Maps> createState() => _MapsState();
+  State<MapsLost> createState() => _MapsLostState();
 }
 
-class _MapsState extends State<Maps> {
+class _MapsLostState extends State<MapsLost> {
 
   late GoogleMapController controller;
 
@@ -39,7 +39,7 @@ class _MapsState extends State<Maps> {
 
   getMarkerdata() async {
     final Uint8List markerIcon = await getBytesFromAssets('images/logo_paw.png', 100);
-    FirebaseFirestore.instance.collection('maps').get().then((docData) {
+    FirebaseFirestore.instance.collection('maps_lost').get().then((docData) {
       if (docData.docs.isNotEmpty) {
         for (int i = 0; i < docData.docs.length; ++i) {
           initMarker(docData.docs[i].data(), docData.docs[i].id);
